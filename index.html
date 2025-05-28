@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Coach</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="hero">
+    <video id="heroVideo" autoplay muted>
+      <source src="videos/ki_coach_2.mp4" type="video/mp4" />
+    </video>
+    <img id="heroLogo" src="images/strava_ai_coach_logo.png" alt="Logo" />
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><select id="languageSelect">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+      </select></li>
+      <li><a href="#" onclick="openLightbox('kontakt')">Kontakt</a></li>
+      <li><a href="#" onclick="openLightbox('impressum')">Impressum</a></li>
+      <li><a href="#" onclick="openLightbox('datenschutz')">Datenschutz</a></li>
+    </ul>
+  </nav>
+  <main id="content">
+    <section class="placeholder">[BLINDTEXT BLOCK]</section>
+    <!-- Scroll-Abschnitte werden hier dynamisch eingefügt -->
+  </main>
+  <div id="lightbox" onclick="closeLightbox()">
+    <div id="lightboxContent" onclick="event.stopPropagation()"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
