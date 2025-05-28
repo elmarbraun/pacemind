@@ -4,9 +4,12 @@ body {
   background: #141b0c;
   color: #ffffff;
 }
+
 h1, h2, h3, h4, h5, h6, strong, b {
   color: #ff6b1d;
 }
+
+/* HERO SECTION */
 #hero {
   position: fixed;
   top: 0;
@@ -19,27 +22,26 @@ h1, h2, h3, h4, h5, h6, strong, b {
   animation: zoomMoveEnhanced 30s infinite alternate ease-in-out;
   transition: background-image 2s ease-in-out;
 }
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  text-align: center;
-  background-size: cover;
-  background-position: center;
-  transition: background-image 2s ease-in-out;
-}
+
 #hero.animate {
-  animation: zoomMove 30s infinite alternate ease-in-out;
+  animation: zoomMoveEnhanced 30s infinite alternate ease-in-out;
 }
-@keyframes zoomMove {
-  0% { background-size: 100%; background-position: center; }
-  50% { background-size: 105%; background-position: 48% 52%; }
-  100% { background-size: 102%; background-position: 52% 48%; }
+
+@keyframes zoomMoveEnhanced {
+  0%   { background-size: 100%; background-position: 50% 50%; }
+  20%  { background-size: 108%; background-position: 46% 52%; }
+  40%  { background-size: 105%; background-position: 54% 48%; }
+  60%  { background-size: 110%; background-position: 52% 54%; }
+  80%  { background-size: 107%; background-position: 48% 46%; }
+  100% { background-size: 103%; background-position: 50% 50%; }
 }
+
 #hero video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 #heroLogo {
   position: fixed;
   top: 0;
@@ -48,14 +50,7 @@ h1, h2, h3, h4, h5, h6, strong, b {
   height: 250px;
   z-index: 10;
 }
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 250px;
-  z-index: 10;
-}
+
 #unmuteButton {
   position: absolute;
   bottom: 20px;
@@ -68,9 +63,12 @@ h1, h2, h3, h4, h5, h6, strong, b {
   color: #ffffff;
   cursor: pointer;
 }
+
 #unmuteButton:hover {
   background: #0b1606;
 }
+
+/* NAVIGATION */
 nav {
   position: sticky;
   top: 250px;
@@ -78,6 +76,7 @@ nav {
   z-index: 9;
   text-align: center;
 }
+
 nav ul {
   list-style: none;
   display: inline-flex;
@@ -85,26 +84,26 @@ nav ul {
   padding: 1rem;
   margin: 0;
 }
+
 nav a, select {
   color: #ffffff;
   background: transparent;
   border: none;
   font-size: 1rem;
 }
-#content {
-  padding: 2rem;
-}
-.placeholder {
-  min-height: 200px;
-}
 
+/* CONTENT */
 #content {
   margin-top: 250px;
   padding: 2rem;
   z-index: 1;
-  position: relative;
 }
 
+.placeholder {
+  min-height: 200px;
+}
+
+/* SCROLL ABSCHNITTE */
 .scroll-section {
   opacity: 0;
   transform: translateY(50px);
@@ -120,15 +119,40 @@ nav a, select {
   transform: translateY(0);
 }
 
-
-#hero.animate {
-  animation: zoomMoveEnhanced 30s infinite alternate ease-in-out;
+/* LIGHTBOX */
+#lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
-@keyframes zoomMoveEnhanced {
-  0%   { background-size: 100%; background-position: 50% 50%; }
-  20%  { background-size: 108%; background-position: 46% 52%; }
-  40%  { background-size: 105%; background-position: 54% 48%; }
-  60%  { background-size: 110%; background-position: 52% 54%; }
-  80%  { background-size: 107%; background-position: 48% 46%; }
-  100% { background-size: 103%; background-position: 50% 50%; }
+
+#lightboxContent {
+  background: #111;
+  padding: 1rem;
+  max-width: 60%;
+  max-height: 80%;
+  overflow-y: auto;
+  color: white;
+  position: relative;
+}
+
+#lightboxClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+#lightboxInner {
+  margin-top: 2rem;
 }

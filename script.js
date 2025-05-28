@@ -89,10 +89,14 @@ window.addEventListener('load', () => {
 
 function openVideoLightbox(name) {
   const lightbox = document.getElementById('lightbox');
-  const content = document.getElementById('lightboxContent');
+  const content = document.getElementById('lightboxInner');
   lightbox.style.display = 'flex';
-  content.innerHTML = `<video controls autoplay style="width: 100%;"><source src="videos/${name}.mov" type="video/quicktime" /></video>`;
+  content.innerHTML = `
+    <video controls autoplay style="width: 100%;">
+      <source src="videos/${name}.mov" type="video/quicktime" />
+    </video>`;
 }
+
 
 function closeLightbox() {
   document.getElementById('lightbox').style.display = 'none';

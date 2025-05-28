@@ -31,7 +31,7 @@
     </ul>
   </nav>
   <main id="content">
-    <b>Willkommen zu PaceMind</b><p>
+    <section class="placeholder"><b>Willkommen zu PaceMind</b><p>
     Jeder Sport ist eine Leidenschaft und jede Leidenschaft sollte so gut es geht gelebt werden und gerade Ausdauersport lebt von dem Wunsch nach
     stetiger Verbesserung. Darum tragen wir Brustgurte, Sportuhren und allerlei Technik mit uns herum um diese Verbesserungen zu erfassen, sie 
     sichtbar zu machen und als Grundlage zu nutzen unsere Leidenschaft weiter zu treiben und schneller oder ausdauernder zu sein als gestern.
@@ -45,11 +45,20 @@ Dabei entsteht zwangsläufig eine Flut von Daten und so schön es ist Sie zu erz
 <p>Verfügbar heisst aber nicht unbedingt verständlich oder nützlich - dafür gibt es PaceMind. Hinterlege Dein Trainingsziel bei PaceMind und 
   lasse die Daten von Strava darauf abgleichen. So erhälst Du klare und logische Analysen, Ratschläge, Übersichten und Vergleichswerte. und
   egal, welche Information zu Deinen Trainings du gerade brauchst: Du kannst PaceMind einfach danach fragen!</p>
-    
+  <p>
+    PaceMind ist eine WebApp - dass bedeutet, Sie läuft überall: Egal Ob PC, Mac, Linux, IPhone oder Google Handy, Wenn Du mit dem Gerät 
+    ins Internet kommst wird Sie funktionieren und Du kannst Deine Auswertungen mit deinem Lieblingsdevice machen. Einfach zu <a href="https://PaceMind.app" target="_blank">
+    PaceMind.app</a> surfen und sich einen Desktop Link oder Bookmark setzen, das ist alles. Keine Registrierung, kein Abo - einfach loslegen.
+    </p>
+</section>
   </main>
-  <div id="lightbox" onclick="closeLightbox()">
-    <div id="lightboxContent" onclick="event.stopPropagation()"></div>
+  <!-- Geänderte Lightbox -->
+ <div id="lightbox" onclick="closeLightbox()">
+  <div id="lightboxContent" onclick="event.stopPropagation()">
+    <button id="lightboxClose" onclick="closeLightbox()">×</button>
+    <div id="lightboxInner"></div>
   </div>
+</div>
   <script src="script.js"></script>
 </body>
 </html>
