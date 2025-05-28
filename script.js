@@ -1,7 +1,9 @@
+
 window.addEventListener('load', () => {
   const heroVideo = document.getElementById('heroVideo');
   const heroLogo = document.getElementById('heroLogo');
   const unmuteButton = document.getElementById('unmuteButton');
+  const hero = document.getElementById('hero');
 
   heroVideo.play();
 
@@ -13,9 +15,33 @@ window.addEventListener('load', () => {
 
   heroVideo.addEventListener('ended', () => {
     heroVideo.style.display = 'none';
+    unmuteButton.style.display = 'none';
     heroLogo.style.display = 'block';
+
+    const images = ['images/atmo1.png', 'images/atmo2.png', 'images/atmo3.png', 'images/atmo4.png'];
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
+    const shuffled = shuffle([...images]);
+    let index = 0;
+    function cycleBackgrounds() {
+      hero.style.backgroundImage = `url('${shuffled[index]}')`;
+      index = (index + 1) % shuffled.length;
+    }
+
+    cycleBackgrounds();
+    hero.classList.add("animate");
+    setInterval(cycleBackgrounds, 8000);
   });
 
+  // Scroll-Abschnitte mit Videos
   const videos = [
     "anmelden", "sprachwahl", "aktivitaetsbericht", "fitnessziele",
     "leistungszeitraum", "alle_trainings_analysieren", "letzte_aktivitaet", "ki_coach"
@@ -28,10 +54,13 @@ window.addEventListener('load', () => {
     const video = document.createElement('video');
     video.src = 'videos/' + name + '.mp4';
     video.muted = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("autoplay", "");
+    video.setAttribute("loop", "");
     video.addEventListener('click', () => openVideoLightbox(name));
     const text = document.createElement('div');
     text.className = 'scroll-text';
-    text.innerHTML = `<h3>${name.replace('_', ' ')}</h3><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>`;
+    text.innerHTML = `<h3>${name.replace('_', ' ')}</h3><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat...</p>`;
     text.addEventListener('click', () => openVideoLightbox(name));
     if (index % 2 === 0) {
       section.appendChild(video);
@@ -42,6 +71,20 @@ window.addEventListener('load', () => {
     }
     container.appendChild(section);
   });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  setTimeout(() => {
+    document.querySelectorAll('.scroll-section').forEach(section => {
+      observer.observe(section);
+    });
+  }, 100);
 });
 
 function openVideoLightbox(name) {
@@ -63,23 +106,5 @@ function openLightbox(type) {
   const lightbox = document.getElementById('lightbox');
   const content = document.getElementById('lightboxContent');
   lightbox.style.display = 'flex';
-  content.innerHTML = `<h2>${type}</h2><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>`;
+  content.innerHTML = `<h2>${type}</h2><p>Lorem ipsum dolor sit amet...</p>`;
 }
-
-
-// Scroll-Animationen aktivieren
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.2 });
-
-// Starte Observer erst, nachdem alle Scroll-Sektionen erstellt wurden
-setTimeout(() => {
-  document.querySelectorAll('.scroll-section').forEach(section => {
-    observer.observe(section);
-  });
-}, 100); // kleiner Delay reicht
-
