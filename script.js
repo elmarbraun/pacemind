@@ -76,6 +76,10 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.2 });
 
-document.querySelectorAll('.scroll-section').forEach(section => {
-  observer.observe(section);
-});
+// Starte Observer erst, nachdem alle Scroll-Sektionen erstellt wurden
+setTimeout(() => {
+  document.querySelectorAll('.scroll-section').forEach(section => {
+    observer.observe(section);
+  });
+}, 100); // kleiner Delay reicht
+
