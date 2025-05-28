@@ -16,10 +16,23 @@ body {
 }
 #hero img {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   height: 250px;
+  z-index: 10;
+}
+#unmuteButton {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  z-index: 11;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 nav {
   position: sticky;
@@ -35,20 +48,6 @@ nav ul {
 }
 #content {
   padding: 2rem;
-}
-.scroll-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 4rem 0;
-}
-.scroll-section video {
-  width: 300px;
-  cursor: pointer;
-}
-.scroll-text {
-  max-width: 50%;
-  cursor: pointer;
 }
 #lightbox {
   position: fixed;
@@ -66,12 +65,4 @@ nav ul {
   max-height: 80%;
   overflow-y: auto;
   color: white;
-}
-#hero img {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 250px;
-  z-index: 10;
 }
