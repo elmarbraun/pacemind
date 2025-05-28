@@ -1,13 +1,13 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  background: #141b0c; /* Hintergrundfarbe aus waldpfad.png */
+  background: #141b0c;
   color: #ffffff;
 }
 
 h1, h2, h3, h4, h5, h6,
 strong, b {
-  color: #ff6b1d; /* Orangeton aus Logo */
+  color: #ff6b1d;
 }
 
 #hero {
@@ -40,20 +40,20 @@ strong, b {
   padding: 10px 20px;
   font-size: 1rem;
   z-index: 11;
-  background: #151c0c; /* Buttonfarbe */
+  background: #151c0c;
   border: none;
   color: #ffffff;
   cursor: pointer;
 }
 
 #unmuteButton:hover {
-  background: #0b1606; /* Hoverfarbe */
+  background: #0b1606;
 }
 
 nav {
   position: sticky;
   top: 250px;
-  background: #131c0a; /* Menüfarbe */
+  background: #131c0a;
   z-index: 9;
   text-align: center;
 }
@@ -77,7 +77,6 @@ nav a, select {
   padding: 2rem;
 }
 
-/* Scroll-Animationen */
 .scroll-section {
   opacity: 0;
   transform: translateY(50px);
