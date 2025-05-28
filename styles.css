@@ -67,3 +67,11 @@ nav ul {
   overflow-y: auto;
   color: white;
 }
+#hero img {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 250px;
+  z-index: 10;
+}

@@ -1,9 +1,13 @@
 window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('heroVideo').style.display = 'none';
-    const logo = document.getElementById('heroLogo');
-    logo.style.display = 'block';
-  }, 3000);
+  const heroVideo = document.getElementById('heroVideo');
+  const heroLogo = document.getElementById('heroLogo');
+
+  heroVideo.addEventListener('ended', () => {
+    heroVideo.style.display = 'none';
+    heroLogo.style.display = 'block';
+  });
+});
+
 
   const videos = [
     "anmelden", "sprachwahl", "aktivitaetsbericht", "fitnessziele",
