@@ -159,8 +159,9 @@ function openVideoLightbox(name) {
   const content = document.getElementById('lightboxInner');
   lightbox.style.display = 'flex';
   content.innerHTML = `
-    <video controls autoplay style="width: 100%;">
-      <source src="videos/${name}.mov" type="video/quicktime" />
+    <video controls autoplay muted width="600">
+      <source src="videos/large/${name}.mp4" type="video/mp4" />
+      Dein Browser unterstützt das Video-Tag nicht.
     </video>`;
 }
 
