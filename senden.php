@@ -1,31 +1,36 @@
 <?php
-// Einfache Validierung
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $betreff    = htmlspecialchars($_POST["betreff"]);
-    $vorname    = htmlspecialchars($_POST["vorname"]);
-    $nachname   = htmlspecialchars($_POST["nachname"]);
-    $email      = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
-    $nachricht  = htmlspecialchars($_POST["nachricht"]);
+// Konfiguration
+$empfaenger = "braun.elmar@gmail.com"; // <-- Deine echte E-Mail hier eintragen
+$absenderAdresse = "website@pacemind.io"; // Optional, muss auf Mittwald existieren
 
-    if ($email) {
-        $to = "braun.elmar@gmail.com"; // << hier deine Zieladresse einsetzen
-        $subject = "Kontaktformular: $betreff";
-        $message = "Von: $vorname $nachname\n";
-        $message .= "E-Mail: $email\n\n";
-        $message .= "Nachricht:\n$nachricht";
+// Felder auslesen und filtern
+$betreff   = isset($_POST['betreff']) ? strip_tags($_POST['betreff']) : '';
+$vorname   = isset($_POST['vorname']) ? strip_tags($_POST['vorname']) : '';
+$nachname  = isset($_POST['nachname']) ? strip_tags($_POST['nachname']) : '';
+$email     = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) : '';
+$nachricht = isset($_POST['nachricht']) ? strip_tags($_POST['nachricht']) : '';
 
-        $headers = "From: kontaktformular@deinedomain.de\r\n";
-        $headers .= "Reply-To: $email\r\n";
+// Validierung
+if (!$email || !$betreff || !$vorname || !$nachname || !$nachricht) {
+    die("Bitte füllen Sie alle Felder korrekt aus.");
+}
 
-        if (mail($to, $subject, $message, $headers)) {
-            echo "<p style='color:green'>Vielen Dank! Deine Nachricht wurde erfolgreich gesendet.</p>";
-        } else {
-            echo "<p style='color:red'>Fehler beim Senden der Nachricht.</p>";
-        }
-    } else {
-        echo "<p style='color:red'>Ungültige E-Mail-Adresse.</p>";
-    }
+// Nachricht zusammenbauen
+$fullMessage = "Neue Nachricht vom Kontaktformular:\n\n";
+$fullMessage .= "Name: $vorname $nachname\n";
+$fullMessage .= "E-Mail: $email\n";
+$fullMessage .= "Betreff: $betreff\n\n";
+$fullMessage .= "Nachricht:\n$nachricht\n";
+
+// Header vorbereiten
+$header  = "From: $absenderAdresse\r\n";
+$header .= "Reply-To: $email\r\n";
+$header .= "Content-Type: text/plain; charset=utf-8\r\n";
+
+// Mail versenden
+if (mail($empfaenger, "Kontakt: $betreff", $fullMessage, $header)) {
+    echo "Vielen Dank! Ihre Nachricht wurde gesendet.";
 } else {
-    echo "<p style='color:red'>Ungültige Anfrage.</p>";
+    echo "Fehler beim Versenden der Nachricht. Bitte versuchen Sie es später erneut.";
 }
 ?>
