@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Datenschutzerklärung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      color: white;
+      background: url('images/atmo4.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    a, a:visited, a:hover, a:active {
+      color: #ff6b1d;
+      text-decoration: none;
+    }
+
+    .content-wrapper {
+      background-color: rgba(20, 27, 12, 0.5);
+      padding: 2rem 3rem;
+      border-radius: 1rem;
+      margin: 4rem auto;
+      max-width: 960px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    h2, h3, h4, h5 {
+      color: #ff6b1d;
+      margin-top: 2rem;
+    }
+
+    p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      margin-bottom: 1.5rem;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: none;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background: #ff6b1d;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      align-self: flex-start;
+    }
+  </style>
+</head>
+<body>
+  <div class="content-wrapper">
+    <h2>Kontakt</h2>
+
+    <form action="#" method="POST" onsubmit="return validateForm();">
+      <label for="betreff">Betreff</label>
+      <select id="betreff" name="betreff" required>
+        <option value="">Bitte wählen</option>
+        <option value="problem">Ich habe ein Problem</option>
+        <option value="vorschlag">Ich möchte etwas vorschlagen</option>
+        <option value="allgemein">Allgemein</option>
+      </select>
+
+      <label for="vorname">Vorname</label>
+      <input type="text" id="vorname" name="vorname" required>
+
+      <label for="nachname">Nachname</label>
+      <input type="text" id="nachname" name="nachname" required>
+
+      <label for="email">E-Mail-Adresse</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="nachricht">Nachricht</label>
+      <textarea id="nachricht" name="nachricht" rows="6" required></textarea>
+
+      <button type="submit">Absenden</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const form = document.querySelector("form");
+      if (!form.checkValidity()) {
+        alert("Bitte füllen Sie alle Pflichtfelder korrekt aus.");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>
