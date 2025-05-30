@@ -29,7 +29,8 @@ $header .= "Content-Type: text/plain; charset=utf-8\r\n";
 
 // Mail versenden
 if (mail($empfaenger, "Kontakt: $betreff", $fullMessage, $header)) {
-    echo "Vielen Dank! Ihre Nachricht wurde gesendet.";
+    header("Location: danke.html");
+    exit;
 } else {
     echo "Fehler beim Versenden der Nachricht. Bitte versuchen Sie es später erneut.";
 }
