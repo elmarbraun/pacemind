@@ -3,7 +3,7 @@ name: FTP Deploy
 on:
   push:
     branches:
-      - main  # oder "master", je nach deinem Repo
+      - main  # oder master, je nachdem wie dein Haupt-Branch heißt
 
 jobs:
   ftp-deploy:
@@ -15,9 +15,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.3
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /html/
+          server-dir: /htdocs/
