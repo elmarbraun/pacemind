@@ -3,7 +3,7 @@ name: FTP Deploy
 on:
   push:
     branches:
-      - main  # oder master, je nachdem wie dein Haupt-Branch heißt
+      - main # oder master, je nachdem wie dein Haupt-Branch heißt
 
 jobs:
   ftp-deploy:
@@ -20,4 +20,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs/
+          server-dir: /
