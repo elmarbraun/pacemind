@@ -1,403 +1,613 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <title>PaceMind entdecken</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  
+  <head>
+    <meta charset="UTF-8" />
+    <title>PaceMind entdecken</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
     <script type="text/javascript">
-  var googleTranslateLoaded = false;
-  var currentTranslatingImg = null;
-  var translateApiLoaded = false;
+      var googleTranslateLoaded = false;
+      var currentTranslatingImg = null;
+      var translateApiLoaded = false;
 
-  function showLoader() {
-    document.getElementById('loader').style.display = 'block';
-    if (currentTranslatingImg) {
-      currentTranslatingImg.classList.add('loading');
-    }
-  }
-
-  function hideLoader() {
-    document.getElementById('loader').style.display = 'none';
-    if (currentTranslatingImg) {
-      currentTranslatingImg.classList.remove('loading');
-    }
-  }
-
-function initGoogleTranslate() {
-  if (!translateApiLoaded) {
-    translateApiLoaded = true;
-    var script = document.createElement('script');
-    // Nutze HTTPS-URL, um Mixed Content Probleme zu vermeiden
-    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    // Bei erfolgreichem Laden des Scripts
-    script.onload = function() {
-      console.log('Google Translate Script erfolgreich geladen.');
-    };
-    // Bei Fehler beim Laden des Scripts
-    script.onerror = function() {
-      console.error('Fehler beim Laden des Google Translate Scripts.');
-      hideLoader();
-    };
-    document.head.appendChild(script);
-  }
-}
-
-  function translateLanguage(lang, imgElement) {
-    currentTranslatingImg = imgElement;
-    
-    if (!googleTranslateLoaded) {
-      showLoader();
-      initGoogleTranslate();
-      
-      // Versuche es nach 2 Sekunden nochmal
-      setTimeout(function() {
-        if (googleTranslateLoaded) {
-          doTranslation(lang);
-        } else {
-          hideLoader();
-          alert('Übersetzungsdienst konnte nicht geladen werden. Bitte Seite neu laden.');
-        }
-      }, 2000);
-      return;
-    }
-    
-    doTranslation(lang);
-  }
-
-  function doTranslation(lang) {
-    showLoader();
-    
-    var frame = document.querySelector('iframe.goog-te-menu-frame');
-    if (frame) {
-      try {
-        var langLink = frame.contentWindow.document.querySelector('a[lang=' + lang + ']');
-        if (langLink) {
-          langLink.click();
-          // Verstecke den Loader nach einer kurzen Verzögerung
-          setTimeout(hideLoader, 500);
-        } else {
-          hideLoader();
-          console.error('Sprachlink nicht gefunden');
-        }
-      } catch (e) {
-        hideLoader();
-        console.error('Fehler beim Zugriff auf Übersetzungsmenü:', e);
-      }
-    } else {
-      hideLoader();
-      console.error('Übersetzungsframe nicht gefunden');
-    }
-  }
-
-function googleTranslateElementInit() {
-  try {
-    // Initialisiere das Übersetzungs-Widget
-    new google.translate.TranslateElement({
-      pageLanguage: 'de',
-      includedLanguages: 'en,fr,es',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-
-    googleTranslateLoaded = true;
-
-    // Überprüfe, ob der Übersetzungs-Frame geladen ist
-    var checkFrameInterval = setInterval(function() {
-      var frame = document.querySelector('iframe.goog-te-menu-frame');
-      if (frame) {
-        clearInterval(checkFrameInterval);
-        // Frame ist geladen, wir können Übersetzungen ausführen
+      function showLoader() {
+        document.getElementById("loader").style.display = "block";
         if (currentTranslatingImg) {
-          var lang = currentTranslatingImg.getAttribute('title');
-          if (lang === 'English') doTranslation('en');
-          else if (lang === 'Français') doTranslation('fr');
-          else if (lang === 'Español') doTranslation('es');
+          currentTranslatingImg.classList.add("loading");
         }
       }
-    }, 100);
-  } catch (e) {
-    console.error('Fehler beim Initialisieren von Google Translate:', e);
-    hideLoader();
-    alert('Fehler beim Laden des Übersetzungsdienstes. Bitte versuchen Sie es später erneut.');
-  }
-}
-</script>
 
+      function hideLoader() {
+        document.getElementById("loader").style.display = "none";
+        if (currentTranslatingImg) {
+          currentTranslatingImg.classList.remove("loading");
+        }
+      }
 
-<style>
-    :root {
-      --hero-height: 250px;
-    }
+      function initGoogleTranslate() {
+        if (!translateApiLoaded) {
+          translateApiLoaded = true;
+          var script = document.createElement("script");
+          // Nutze HTTPS-URL, um Mixed Content Probleme zu vermeiden
+          script.src =
+            "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+          // Bei erfolgreichem Laden des Scripts
+          script.onload = function () {
+            console.log("Google Translate Script erfolgreich geladen.");
+          };
+          // Bei Fehler beim Laden des Scripts
+          script.onerror = function () {
+            console.error("Fehler beim Laden des Google Translate Scripts.");
+            hideLoader();
+          };
+          document.head.appendChild(script);
+        }
+      }
 
-    #bg-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  min-width: 100vw;
-  min-height: 100vh;
-  object-fit: cover;
-  z-index: -1;
-}
-    body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background: #141b0c;
-      color: white;
-    }
+      function translateLanguage(lang, imgElement) {
+        currentTranslatingImg = imgElement;
 
-    #hero {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--hero-height);
-      z-index: 5;
-      background-size: cover;
-      background-position: center;
-      animation: zoomMoveEnhanced 30s infinite alternate ease-in-out;
-      transition: background-image 2s ease-in-out;
-    }
+        if (!googleTranslateLoaded) {
+          showLoader();
+          initGoogleTranslate();
 
-    #heroLogo {
-      position: absolute; /* Geändert von fixed zu absolute */
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 100%;
-      max-height: var(--hero-height);
-      z-index: 10;
-      pointer-events: none;
-    }
+          // Versuche es nach 2 Sekunden nochmal
+          setTimeout(function () {
+            if (googleTranslateLoaded) {
+              doTranslation(lang);
+            } else {
+              hideLoader();
+              alert(
+                "Übersetzungsdienst konnte nicht geladen werden. Bitte Seite neu laden."
+              );
+            }
+          }, 2000);
+          return;
+        }
 
-    .zentriert {
-      text-align: center;
-    }
+        doTranslation(lang);
+      }
 
-    .card.zentriert {
-      background: transparent;
-      box-shadow: none;
-      padding: 0.5rem;
-      font-size: 0.9rem;
-      color: #ff6b1d;
-    }
+      function doTranslation(lang) {
+        showLoader();
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
-      position: relative;
-      z-index: 1;
-      margin-top: var(--hero-height); /* Platz für das Hero-Banner */
-    }
+        var frame = document.querySelector("iframe.goog-te-menu-frame");
+        if (frame) {
+          try {
+            var langLink = frame.contentWindow.document.querySelector(
+              "a[lang=" + lang + "]"
+            );
+            if (langLink) {
+              langLink.click();
+              // Verstecke den Loader nach einer kurzen Verzögerung
+              setTimeout(hideLoader, 500);
+            } else {
+              hideLoader();
+              console.error("Sprachlink nicht gefunden");
+            }
+          } catch (e) {
+            hideLoader();
+            console.error("Fehler beim Zugriff auf Übersetzungsmenü:", e);
+          }
+        } else {
+          hideLoader();
+          console.error("Übersetzungsframe nicht gefunden");
+        }
+      }
 
-    .card.full-width {
-      grid-column: 1 / -1; /* über alle Spalten spannen */
-    }
-    
-    .card {
-      background: #1d2711;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
+      function googleTranslateElementInit() {
+        try {
+          // Initialisiere das Übersetzungs-Widget
+          new google.translate.TranslateElement(
+            {
+              pageLanguage: "de",
+              includedLanguages: "en,fr,es",
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            },
+            "google_translate_element"
+          );
 
-    .card h3 {
-      color: #ff6b1d;
-    }
+          googleTranslateLoaded = true;
 
-    a, a:visited, a:hover, a:active {
-      color: #ff6b1d;
-      text-decoration: none;
-    }
+          // Überprüfe, ob der Übersetzungs-Frame geladen ist
+          var checkFrameInterval = setInterval(function () {
+            var frame = document.querySelector("iframe.goog-te-menu-frame");
+            if (frame) {
+              clearInterval(checkFrameInterval);
+              // Frame ist geladen, wir können Übersetzungen ausführen
+              if (currentTranslatingImg) {
+                var lang = currentTranslatingImg.getAttribute("title");
+                if (lang === "English") doTranslation("en");
+                else if (lang === "Français") doTranslation("fr");
+                else if (lang === "Español") doTranslation("es");
+              }
+            }
+          }, 100);
+        } catch (e) {
+          console.error("Fehler beim Initialisieren von Google Translate:", e);
+          hideLoader();
+          alert(
+            "Fehler beim Laden des Übersetzungsdienstes. Bitte versuchen Sie es später erneut."
+          );
+        }
+      }
+    </script>
 
-    .card button {
-      background: #ff6b1d;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 1rem;
-      cursor: pointer;
-      font-weight: bold;
-    }
+    <style>
+      :root {
+        --hero-height: 250px;
+      }
 
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
+      #bg-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-width: 100vw;
+        min-height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+      }
+      body {
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        background: #141b0c;
+        color: white;
+      }
 
-    .modal-content {
-      background: #1d2711;
-      color: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      max-width: 700px;
-      width: 90%;
-      text-align: center;
-    }
+      #hero {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--hero-height);
+        z-index: 5;
+        background-size: cover;
+        background-position: center;
+        animation: zoomMoveEnhanced 30s infinite alternate ease-in-out;
+        transition: background-image 2s ease-in-out;
+      }
 
-    .modal-content h2 {
-      color: #ff6b1d;
-    }
+      #heroLogo {
+        position: absolute; /* Geändert von fixed zu absolute */
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 100%;
+        max-height: var(--hero-height);
+        z-index: 10;
+        pointer-events: none;
+      }
 
-    .modal-content button {
-      margin-top: 1rem;
-      background: #ff6b1d;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 1rem;
-      cursor: pointer;
-    }
+      .zentriert {
+        text-align: center;
+      }
 
-    html {
-      scroll-padding-top: var(--hero-height);
-    }
+      .card.zentriert {
+        background: transparent;
+        box-shadow: none;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        color: #ff6b1d;
+      }
 
-    .language-selector img {
-  width: 20px;
-  height: auto;
-  margin: 0 5px;
-  cursor: pointer;
-  vertical-align: middle;
-}
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 1;
+        margin-top: var(--hero-height); /* Platz für das Hero-Banner */
+      }
 
-.loader {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #ff6b1d;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
-}
+      .card.full-width {
+        grid-column: 1 / -1; /* über alle Spalten spannen */
+      }
 
-@keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
+      .card {
+        background: #1d2711;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
 
-.language-selector img {
-  transition: opacity 0.3s;
-}
+      .card h3 {
+        color: #ff6b1d;
+      }
 
-.language-selector img.loading {
-  opacity: 0.5;
-}
+      a,
+      a:visited,
+      a:hover,
+      a:active {
+        color: #ff6b1d;
+        text-decoration: none;
+      }
 
-.language-selector img:hover {
-      transform: scale(1.1);
-    }
+      .card button {
+        background: #ff6b1d;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+      }
 
-  </style>
-</head>
-<body>
-<video autoplay muted loop playsinline id="bg-video">
-  <source src="videos/hero.mp4" type="video/mp4">
-  Dein Browser unterstützt das Video-Tag nicht.
-</video>
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
 
-  <div id="hero">
-    <img id="heroLogo" src="images/strava_ai_coach_logo.png" alt="Logo"/>
-  </div>
+      .modal-content {
+        background: #1d2711;
+        color: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: 700px;
+        width: 90%;
+        text-align: center;
+      }
 
-  <!-- Platzhalter nicht mehr nötig, da margin-top im info-grid -->
-  <div class="info-grid">
-    <div class="card full-width zentriert"> <a href="kontakt.html">Kontakt</a> | <a href="impressum.html">Impressum</a> | <a href="datenschutzerklaerung.html">Datenschutzerklärung</a> | <span class="language-selector">
-  <img src="https://flagcdn.com/w20/gb.png" alt="English" onclick="translateLanguage('en', this)" title="English">
-  <img src="https://flagcdn.com/w20/fr.png" alt="Français" onclick="translateLanguage('fr', this)" title="Français">
-  <img src="https://flagcdn.com/w20/es.png" alt="Español" onclick="translateLanguage('es', this)" title="Español">
-</span>
- </div>
-    <div class="card"><h3>Anmelden</h3><p>PaceMind.app aufrufen und warten bis der Ladevorgang abgeschlossen ist und dann auf 'Jetzt verbinden...</p><button data-title="Anmelden" data-text="..." data-video="videos/large/anmelden.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-    <div class="card"><h3>Fitnessziele</h3><p>Du kannst ein oder mehrere Ziele eingeben...</p><button data-title="Fitnessziele" data-text="..." data-video="videos/large/fitnessziele.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-    <div class="card"><h3>Sprachwahl</h3><p>PaceMind soll allen Usern auf allen Geräten zur Verfügung stehen...</p><button data-title="Sprachwahl" data-text="..." data-video="videos/large/sprachwahl.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-    <div class="card"><h3>Leistungszeitraum</h3><p>Der Leistungszeitraum bestimmt, welche und wie viele Daten PaceMind analysiert...</p><button data-title="Leistungszeitraum" data-text="..." data-video="videos/large/leistungszeitraum.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-    <div class="card"><h3>Ki Coach</h3><p>Frage PaceMind einfach: 'Was war meine schnellste Pace?'...</p><button data-title="Ki Coach" data-text="..." data-video="videos/large/ki_coach.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-    <div class="card"><h3>Aktivitaetsbericht</h3><p>Default ist der Leistungszeitraum in den Voreinstellungen auf das aktuelle Jahr...</p><button data-title="Aktivitaetsbericht" data-text="..." data-video="videos/large/aktivitaetsbericht.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-    <div class="card"><h3>Alle Trainings Analysieren</h3><p>Klicke auf 'Alle anzeigen', um eine Übersicht deiner Trainings zu öffnen...</p><button data-title="Alle Trainings Analysieren" data-text="..." data-video="videos/large/alle_trainings_analysieren.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-    <div class="card"><h3>Letzte Aktivitaet</h3><p>Die Übersicht zeigt deine letzten Einheiten...</p><button data-title="Letzte Aktivitaet" data-text="..." data-video="videos/large/letzte_aktivitaet.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-    <div class="card"><h3>Eine Nachricht vom Entwickler</h3><p>Wie alles begann und Du helfen kannst.</p><button data-title="Entwicklernachricht" data-text="Schalte bitte den Ton ein" data-video="videos/herausgeber.mp4" onclick="openModalFromButton(this)">Mehr erfahren</button></div>
-  
-  
-   <div class="card full-width">
-  <h3>Willkommen zu PaceMind</h3>
-  <p>
-    Jeder Sport ist eine Leidenschaft und jede Leidenschaft sollte so gut es geht gelebt werden und gerade Ausdauersport lebt von dem Wunsch nach
-    stetiger Verbesserung. Darum tragen wir Brustgurte, Sportuhren und allerlei Technik mit uns herum um diese Verbesserungen zu erfassen, sie 
-    sichtbar zu machen und als Grundlage zu nutzen unsere Leidenschaft weiter zu treiben und schneller oder ausdauernder zu sein als gestern.
-  </p>
-  <p>
-    Dabei entsteht zwangsläufig eine Flut von Daten und so schön es ist Sie zu erzeugen, so frustrierend kann es sein sie zu nutzen oder zu verstehen.
-  </p>
-  <p>
-    PaceMind soll diesen Frust vergessen machen, wir bedienen uns an der klugen Vorarbeit einer der großartigsten SportApps unserer Zeit: Strava.
-    Hier werden die Daten, egal ob die Quelle Garmin, Polar, Suunto, Huawei, Apple oder Google heißt, in eine einheitliche Struktur aggregiert und
-    verfügbar gemacht.
-  </p>
-  <p>
-    Verfügbar heißt aber nicht unbedingt verständlich oder nützlich – dafür gibt es PaceMind. Hinterlege Dein Trainingsziel bei PaceMind und 
-    lasse die Daten von Strava darauf abgleichen. So erhältst Du klare und logische Analysen, Ratschläge, Übersichten und Vergleichswerte. Und
-    egal, welche Information zu Deinem Training Du gerade brauchst: Du kannst PaceMind einfach danach fragen!
-  </p>
-  <p>
-    PaceMind ist eine WebApp – das bedeutet, sie läuft überall: Egal ob PC, Mac, Linux, iPhone oder Android. Wenn Du mit dem Gerät 
-    ins Internet kommst, wird sie funktionieren. Du kannst Deine Auswertungen mit deinem Lieblingsdevice machen. Einfach zu 
-    <a href="https://PaceMind.app" target="_blank">PaceMind.app</a> surfen und sich einen Desktop-Link oder Bookmark setzen – das ist alles. 
-    Keine Registrierung, kein Abo – einfach loslegen.
-  </p>
-</div>
-<div class="card full-width zentriert"> <a href="kontakt.html">Kontakt</a> | <a href="impressum.html">Impressum</a> | <a href="datenschutzerklaerung.html">Datenschutzerklärung</a> | <span class="language-selector">
-  <img src="https://flagcdn.com/w20/gb.png" alt="English" onclick="translateLanguage('en', this)" title="English">
-  <img src="https://flagcdn.com/w20/fr.png" alt="Français" onclick="translateLanguage('fr', this)" title="Français">
-  <img src="https://flagcdn.com/w20/es.png" alt="Español" onclick="translateLanguage('es', this)" title="Español">
-</span>
- </div>
-  </div>
+      .modal-content h2 {
+        color: #ff6b1d;
+      }
 
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <h2 id="modalTitle"></h2>
-      <p id="modalText"></p>
-      <video id="modalVideo" controls autoplay muted style="width:100%; margin-top:1rem;"></video>
-      <button onclick="closeModal()">Schließen</button>
+      .modal-content button {
+        margin-top: 1rem;
+        background: #ff6b1d;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        cursor: pointer;
+      }
+
+      html {
+        scroll-padding-top: var(--hero-height);
+      }
+
+      .language-selector img {
+        width: 20px;
+        height: auto;
+        margin: 0 5px;
+        cursor: pointer;
+        vertical-align: middle;
+      }
+
+      .loader {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #ff6b1d;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      .language-selector img {
+        transition: opacity 0.3s;
+      }
+
+      .language-selector img.loading {
+        opacity: 0.5;
+      }
+
+      .language-selector img:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <video autoplay muted loop playsinline id="bg-video">
+      <source src="videos/hero.mp4" type="video/mp4" />
+      Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+
+    <div id="hero">
+      <img id="heroLogo" src="images/strava_ai_coach_logo.png" alt="Logo" />
     </div>
-  </div>
 
-  <script>
-    function openModalFromButton(btn) {
-      document.getElementById("modalTitle").innerText = btn.getAttribute("data-title");
-      document.getElementById("modalText").innerText = btn.getAttribute("data-text");
-      document.getElementById("modalVideo").src = btn.getAttribute("data-video");
-      document.getElementById("modal").style.display = "flex";
-    }
+    <!-- Platzhalter nicht mehr nötig, da margin-top im info-grid -->
+    <div class="info-grid">
+      <div class="card full-width zentriert">
+        <a href="kontakt.html">Kontakt</a> |
+        <a href="impressum.html">Impressum</a> |
+        <a href="datenschutzerklaerung.html">Datenschutzerklärung</a> |
+        <span class="language-selector">
+          <img
+            src="https://flagcdn.com/w20/gb.png"
+            alt="English"
+            onclick="translateLanguage('en', this)"
+            title="English"
+          />
+          <img
+            src="https://flagcdn.com/w20/fr.png"
+            alt="Français"
+            onclick="translateLanguage('fr', this)"
+            title="Français"
+          />
+          <img
+            src="https://flagcdn.com/w20/es.png"
+            alt="Español"
+            onclick="translateLanguage('es', this)"
+            title="Español"
+          />
+        </span>
+      </div>
+      <div class="card">
+        <h3>Anmelden</h3>
+        <p>
+          PaceMind.app aufrufen und warten bis der Ladevorgang abgeschlossen ist
+          und dann auf 'Jetzt verbinden...
+        </p>
+        <button
+          data-title="Anmelden"
+          data-text="  PaceMind.app aufrufen und warten bis der Ladevorgang abgeschlossen ist und dann auf 'Jetzt verbinden' klicken. Sollte bisher noch
+  Freigabe von Strava für PaceMind vorliegen öffnet sich ein Dialog von Strava in dem Du dazu aufgefordert wirst die Freigabe der Daten durch Eingabe von Benutzername und Passwort
+  zu erteilen. PaceMind Deine Zugangsdaten nicht und speichert sie nicht. Zukünftig wird Strava einfach nachschauen, ob Du PaceMind erlaubt hast und Du musst den Prozess
+  nicht wiederholen. Die Freigabe kannst Du jederzeit auf Deinem Strava Account wieder löschen."
+          data-video="videos/large/anmelden.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
 
-    function closeModal() {
-      const modal = document.getElementById("modal");
-      const video = document.getElementById("modalVideo");
-      modal.style.display = "none";
-      video.pause();
-      video.currentTime = 0;
-    }
-  </script>
-<div id="google_translate_element" style="display: none;"></div>
-<div id="loader" class="loader"></div>
-</body>
+      <div class="card">
+        <h3>Fitnessziele</h3>
+        <p>Du kannst ein oder mehrere Ziele eingeben...</p>
+        <button
+          data-title="Fitnessziele"
+          data-text="Du kannst ein oder mehrere Ziele eingeben, bitte drücke Dich dabei klar und einfach aus. Schreibe zum Beispiel: Ich will 5km unter 40 Minuten laufen können.' Damit verbesserst du
+    die Trainingstipps und die Analyse Deiner Trainings erfolgt in diesem Kontext - wird also wesentlich individueller und konkreter."
+          data-video="videos/large/fitnessziele.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>Sprachwahl</h3>
+        <p>
+          PaceMind soll allen Usern auf allen Geräten zur Verfügung stehen...
+        </p>
+        <button
+          data-title="Sprachwahl"
+          data-text="PaceMind soll allen Usern auf allen Geräten zur Verfügung stehen, derzeit kann die Sprache zwischen Deutsch, Englisch, Französisch und Spanisch geändert werden. Bitte beachte,
+    daß Du einmal auf 'Verbindung trennen' und dann wieder auf 'Jetzt verbinden' klicken solltest, da mit alles frisch und sauber in der gewählten Sprache gezogen wird."
+          data-video="videos/large/sprachwahl.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>Leistungszeitraum</h3>
+        <p>
+          Der Leistungszeitraum bestimmt, welche und wie viele Daten PaceMind
+          analysiert...
+        </p>
+        <button
+          data-title="Leistungszeitraum"
+          data-text="Der Leistungszeitraum oder auch Aktivitätszeitraum bestimmt, welche und wieviele Daten PaceMind holt. Je größer der Zeitraum, desto länger kann die Analyse natürlich dauern,
+    meist ist es aber mit wenigen Sekunden getan. Die Daten werden nur lokal auf Deinem Gerät gespeichert. Wenn Du uns helfen willst besser zu werden, lege bitte den Schalter 
+    'Anonyme Datenfreigabe' um. Wir speichern dann die Daten aus dem gewählten Leistungszeitraum anonymisiert in unserer Datenbank ab. Dabei werden keine Daten, die Dich 
+    identifizierbar machen könnten verwendet. Je mehr Trainings wir aber von unseren Anwendern freigeben bekommen, desto mehr Datenpunkte für eine fundiertere Analyse
+    haben wir dann zur Verfügung und die KI wird schluer - es wird also für alle ein bischen besser, wenn Du da mitmachst."
+          data-video="videos/large/leistungszeitraum.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
+      <div class="card">
+        <h3>Ki Coach</h3>
+        <p>Frage PaceMind einfach: 'Was war meine schnellste Pace?'...</p>
+        <button
+          data-title="Ki Coach"
+          data-text="Alles, was man aus Deinen Daten herauslesen kann kannst Du hier einfach fragen - was war meine schnellste Pace? Vergleiche die Läufe vom Tag x und Tag Y! Gib mir Tipps was ich heute
+trainieren soll! All das und vieles mehr geht. Aber die KI muss noch lernen und braucht dazu noch viele Fragen und Datenpunkte."
+          data-video="videos/large/ki_coach.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
+      <div class="card">
+        <h3>Aktivitaetsbericht</h3>
+        <p>
+          Default ist der Leistungszeitraum in den Voreinstellungen auf das
+          aktuelle Jahr...
+        </p>
+        <button
+          data-title="Aktivitaetsbericht"
+          data-text="Default ist der Leistungszeitraum (siehe unten) in den Voreinstellungen auf das aktuelle Jahr eingestellt. Dieser Zeitraum wird dann betrachtet und für die drei derzeit unterstützen
+  Sportarten (Laufen, Radfahren, Schwimmen) in jeweils zwei Grafiken zusammengefasst, denen Du auf einen Blick Deine Leistungsveränderung und die wichtigsten Grunddaten (Anzahl der
+  Trainings, Dauer und Entfernung) entnehmen kannst. Willst Du etwas anderes oder mehr wissen nutze einfach den KI Coach (s.u.)"
+          data-video="videos/large/aktivitaetsbericht.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
+      <div class="card">
+        <h3>Alle Trainings Analysieren</h3>
+        <p>
+          Klicke auf 'Alle anzeigen', um eine Übersicht deiner Trainings zu
+          öffnen...
+        </p>
+        <button
+          data-title="Alle Trainings Analysieren"
+          data-text="Es kann ein paar Augenblicke dauern, bis der blaue Button 'Alle anzeigen' erscheint. Wenn Du da drauf klickst öffnet sich eine
+    nach Monaten und Sportarten gruppierte Übersicht aller Deiner Trainings im Aktivitätszeitraum. Du kannst Dir dann für jedes x-beliebige Training einen Bericht geben lassen
+    und wenn Du magst auch gezielt die restlichen Details von Strava holen. Auf dem Handy kannst Du horizontal wischen um zwischen den Anwendungen zu wechseln, am Computer sind es 
+    zwei unterschiedliche Browsertabs."
+          data-video="videos/large/alle_trainings_analysieren.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
+      <div class="card">
+        <h3>Letzte Aktivitaet</h3>
+        <p>Die Übersicht zeigt deine letzten Einheiten...</p>
+        <button
+          data-title="Letzte Aktivitaet"
+          data-text="Die Panels zeigen Dir jeweils das letzte Lauf Rad und Schwimmtraining mit den wichtigsten Kenndaten an. Du kannst Dir eine Analyse mit Bewertung Vergleichseinblick und Empfehlungen 
+geben lassen (denk daran Trainingsziele (s.o.) zu bestimmen) oder Dir weitere Details von Strava holen."
+          data-video="videos/large/letzte_aktivitaet.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
+      <div class="card">
+        <h3>Eine Nachricht vom Entwickler</h3>
+        <p>Wie alles begann und Du helfen kannst.</p>
+        <button
+          data-title="Entwicklernachricht"
+          data-text="Schalte bitte den Ton ein"
+          data-video="videos/herausgeber.mp4"
+          onclick="openModalFromButton(this)"
+        >
+          Mehr erfahren
+        </button>
+      </div>
+
+      <div class="card full-width">
+        <h3>Willkommen zu PaceMind</h3>
+        <p>
+          Jeder Sport ist eine Leidenschaft und jede Leidenschaft sollte so gut
+          es geht gelebt werden und gerade Ausdauersport lebt von dem Wunsch
+          nach stetiger Verbesserung. Darum tragen wir Brustgurte, Sportuhren
+          und allerlei Technik mit uns herum um diese Verbesserungen zu
+          erfassen, sie sichtbar zu machen und als Grundlage zu nutzen unsere
+          Leidenschaft weiter zu treiben und schneller oder ausdauernder zu sein
+          als gestern.
+        </p>
+        <p>
+          Dabei entsteht zwangsläufig eine Flut von Daten und so schön es ist
+          Sie zu erzeugen, so frustrierend kann es sein sie zu nutzen oder zu
+          verstehen.
+        </p>
+        <p>
+          PaceMind soll diesen Frust vergessen machen, wir bedienen uns an der
+          klugen Vorarbeit einer der großartigsten SportApps unserer Zeit:
+          Strava. Hier werden die Daten, egal ob die Quelle Garmin, Polar,
+          Suunto, Huawei, Apple oder Google heißt, in eine einheitliche Struktur
+          aggregiert und verfügbar gemacht.
+        </p>
+        <p>
+          Verfügbar heißt aber nicht unbedingt verständlich oder nützlich –
+          dafür gibt es PaceMind. Hinterlege Dein Trainingsziel bei PaceMind und
+          lasse die Daten von Strava darauf abgleichen. So erhältst Du klare und
+          logische Analysen, Ratschläge, Übersichten und Vergleichswerte. Und
+          egal, welche Information zu Deinem Training Du gerade brauchst: Du
+          kannst PaceMind einfach danach fragen!
+        </p>
+        <p>
+          PaceMind ist eine WebApp – das bedeutet, sie läuft überall: Egal ob
+          PC, Mac, Linux, iPhone oder Android. Wenn Du mit dem Gerät ins
+          Internet kommst, wird sie funktionieren. Du kannst Deine Auswertungen
+          mit deinem Lieblingsdevice machen. Einfach zu
+          <a href="https://PaceMind.app" target="_blank">PaceMind.app</a> surfen
+          und sich einen Desktop-Link oder Bookmark setzen – das ist alles.
+          Keine Registrierung, kein Abo – einfach loslegen.
+        </p>
+      </div>
+      <div class="card full-width zentriert">
+        <a href="kontakt.html">Kontakt</a> |
+        <a href="impressum.html">Impressum</a> |
+        <a href="datenschutzerklaerung.html">Datenschutzerklärung</a> |
+        <span class="language-selector">
+          <img
+            src="https://flagcdn.com/w20/gb.png"
+            alt="English"
+            onclick="translateLanguage('en', this)"
+            title="English"
+          />
+          <img
+            src="https://flagcdn.com/w20/fr.png"
+            alt="Français"
+            onclick="translateLanguage('fr', this)"
+            title="Français"
+          />
+          <img
+            src="https://flagcdn.com/w20/es.png"
+            alt="Español"
+            onclick="translateLanguage('es', this)"
+            title="Español"
+          />
+        </span>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+        <video
+          id="modalVideo"
+          controls
+          autoplay
+          muted
+          style="width: 100%; margin-top: 1rem"
+        ></video>
+        <button onclick="closeModal()">Schließen</button>
+      </div>
+    </div>
+
+    <script>
+      function openModalFromButton(btn) {
+        document.getElementById("modalTitle").innerText =
+          btn.getAttribute("data-title");
+        document.getElementById("modalText").innerText =
+          btn.getAttribute("data-text");
+        document.getElementById("modalVideo").src =
+          btn.getAttribute("data-video");
+        document.getElementById("modal").style.display = "flex";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("modal");
+        const video = document.getElementById("modalVideo");
+        modal.style.display = "none";
+        video.pause();
+        video.currentTime = 0;
+      }
+    </script>
+    <div id="google_translate_element" style="display: none"></div>
+    <div id="loader" class="loader"></div>
+  </body>
 </html>

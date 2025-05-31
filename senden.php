@@ -1,6 +1,6 @@
 <?php
 // Konfiguration
-$empfaenger = "braun.elmar@gmail.com"; // <-- Deine echte E-Mail hier eintragen
+$empfaenger = "elmar@pacemind.io"; // <-- Deine echte E-Mail hier eintragen
 $absenderAdresse = "website@pacemind.io"; // Optional, muss auf Mittwald existieren
 
 // Felder auslesen und filtern
