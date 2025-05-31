@@ -9,134 +9,6 @@
       rel="stylesheet"
     />
 
-    <script type="text/javascript">
-      var googleTranslateLoaded = false;
-      var currentTranslatingImg = null;
-      var translateApiLoaded = false;
-
-      function showLoader() {
-        document.getElementById("loader").style.display = "block";
-        if (currentTranslatingImg) {
-          currentTranslatingImg.classList.add("loading");
-        }
-      }
-
-      function hideLoader() {
-        document.getElementById("loader").style.display = "none";
-        if (currentTranslatingImg) {
-          currentTranslatingImg.classList.remove("loading");
-        }
-      }
-
-      function initGoogleTranslate() {
-        if (!translateApiLoaded) {
-          translateApiLoaded = true;
-          var script = document.createElement("script");
-          // Nutze HTTPS-URL, um Mixed Content Probleme zu vermeiden
-          script.src =
-            "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-          // Bei erfolgreichem Laden des Scripts
-          script.onload = function () {
-            console.log("Google Translate Script erfolgreich geladen.");
-          };
-          // Bei Fehler beim Laden des Scripts
-          script.onerror = function () {
-            console.error("Fehler beim Laden des Google Translate Scripts.");
-            hideLoader();
-          };
-          document.head.appendChild(script);
-        }
-      }
-
-      function translateLanguage(lang, imgElement) {
-        currentTranslatingImg = imgElement;
-
-        if (!googleTranslateLoaded) {
-          showLoader();
-          initGoogleTranslate();
-
-          // Versuche es nach 2 Sekunden nochmal
-          setTimeout(function () {
-            if (googleTranslateLoaded) {
-              doTranslation(lang);
-            } else {
-              hideLoader();
-              alert(
-                "Übersetzungsdienst konnte nicht geladen werden. Bitte Seite neu laden."
-              );
-            }
-          }, 2000);
-          return;
-        }
-
-        doTranslation(lang);
-      }
-
-      function doTranslation(lang) {
-        showLoader();
-
-        var frame = document.querySelector("iframe.goog-te-menu-frame");
-        if (frame) {
-          try {
-            var langLink = frame.contentWindow.document.querySelector(
-              "a[lang=" + lang + "]"
-            );
-            if (langLink) {
-              langLink.click();
-              // Verstecke den Loader nach einer kurzen Verzögerung
-              setTimeout(hideLoader, 500);
-            } else {
-              hideLoader();
-              console.error("Sprachlink nicht gefunden");
-            }
-          } catch (e) {
-            hideLoader();
-            console.error("Fehler beim Zugriff auf Übersetzungsmenü:", e);
-          }
-        } else {
-          hideLoader();
-          console.error("Übersetzungsframe nicht gefunden");
-        }
-      }
-
-      function googleTranslateElementInit() {
-        try {
-          // Initialisiere das Übersetzungs-Widget
-          new google.translate.TranslateElement(
-            {
-              pageLanguage: "de",
-              includedLanguages: "en,fr,es",
-              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-            },
-            "google_translate_element"
-          );
-
-          googleTranslateLoaded = true;
-
-          // Überprüfe, ob der Übersetzungs-Frame geladen ist
-          var checkFrameInterval = setInterval(function () {
-            var frame = document.querySelector("iframe.goog-te-menu-frame");
-            if (frame) {
-              clearInterval(checkFrameInterval);
-              // Frame ist geladen, wir können Übersetzungen ausführen
-              if (currentTranslatingImg) {
-                var lang = currentTranslatingImg.getAttribute("title");
-                if (lang === "English") doTranslation("en");
-                else if (lang === "Français") doTranslation("fr");
-                else if (lang === "Español") doTranslation("es");
-              }
-            }
-          }, 100);
-        } catch (e) {
-          console.error("Fehler beim Initialisieren von Google Translate:", e);
-          hideLoader();
-          alert(
-            "Fehler beim Laden des Übersetzungsdienstes. Bitte versuchen Sie es später erneut."
-          );
-        }
-      }
-    </script>
-
     <style>
       :root {
         --hero-height: 250px;
@@ -341,24 +213,30 @@
       <div class="card full-width zentriert">
         <a href="kontakt.html">Kontakt</a> |
         <a href="impressum.html">Impressum</a> |
-        <a href="datenschutzerklaerung.html">Datenschutzerklärung</a> |
+        <a href="datenschutzerklaerung.html">Datenschutzerklärung</a>
         <span class="language-selector">
+          <img
+            src="https://flagcdn.com/w20/de.png"
+            alt="Deutsch"
+            onclick="window.location.href='index.html'"
+            title="Deutsch"
+          />
           <img
             src="https://flagcdn.com/w20/gb.png"
             alt="English"
-            onclick="translateLanguage('en', this)"
+            onclick="window.location.href='index_en.html'"
             title="English"
           />
           <img
             src="https://flagcdn.com/w20/fr.png"
             alt="Français"
-            onclick="translateLanguage('fr', this)"
+            onclick="window.location.href='index_fr.html'"
             title="Français"
           />
           <img
             src="https://flagcdn.com/w20/es.png"
             alt="Español"
-            onclick="translateLanguage('es', this)"
+            onclick="window.location.href='index_es.html'"
             title="Español"
           />
         </span>
@@ -549,24 +427,30 @@ geben lassen (denk daran Trainingsziele (s.o.) zu bestimmen) oder Dir weitere De
       <div class="card full-width zentriert">
         <a href="kontakt.html">Kontakt</a> |
         <a href="impressum.html">Impressum</a> |
-        <a href="datenschutzerklaerung.html">Datenschutzerklärung</a> |
+        <a href="datenschutzerklaerung.html">Datenschutzerklärung</a>
         <span class="language-selector">
+          <img
+            src="https://flagcdn.com/w20/de.png"
+            alt="Deutsch"
+            onclick="window.location.href='index.html'"
+            title="Deutsch"
+          />
           <img
             src="https://flagcdn.com/w20/gb.png"
             alt="English"
-            onclick="translateLanguage('en', this)"
+            onclick="window.location.href='index_en.html'"
             title="English"
           />
           <img
             src="https://flagcdn.com/w20/fr.png"
             alt="Français"
-            onclick="translateLanguage('fr', this)"
+            onclick="window.location.href='index_fr.html'"
             title="Français"
           />
           <img
             src="https://flagcdn.com/w20/es.png"
             alt="Español"
-            onclick="translateLanguage('es', this)"
+            onclick="window.location.href='index_es.html'"
             title="Español"
           />
         </span>
@@ -607,7 +491,7 @@ geben lassen (denk daran Trainingsziele (s.o.) zu bestimmen) oder Dir weitere De
         video.currentTime = 0;
       }
     </script>
-    <div id="google_translate_element" style="display: none"></div>
+
     <div id="loader" class="loader"></div>
   </body>
 </html>
