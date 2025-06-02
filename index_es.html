@@ -173,6 +173,44 @@
       .language-selector img:hover {
         transform: scale(1.1);
       }
+      .cta-btn {
+        display: inline-block;
+        background: linear-gradient(90deg, #ff6b1d 60%, #ffa955 100%);
+        color: #fff !important;
+        font-weight: 500;
+        font-size: 1.02rem;
+        border-radius: 1.7rem;
+        padding: 0.35rem 1.2rem 0.35rem 0.9rem;
+        margin-right: 0.8rem;
+        text-decoration: none;
+        letter-spacing: 0.01em;
+        border: none;
+        box-shadow: 0 2px 8px 0 rgba(255, 107, 29, 0.09);
+        vertical-align: middle;
+        transition: box-shadow 0.23s cubic-bezier(0.4, 0, 0.2, 1),
+          background 0.22s, transform 0.16s;
+        animation: cta-glow 2.1s ease-in-out infinite alternate;
+        outline: none;
+      }
+      .cta-btn:hover,
+      .cta-btn:active,
+      .cta-btn:focus {
+        background: linear-gradient(90deg, #ff8846 50%, #ffce90 100%);
+        color: #fff !important;
+        box-shadow: 0 3px 14px 0 rgba(255, 107, 29, 0.21);
+        text-decoration: none;
+        transform: translateY(-1px) scale(1.035);
+      }
+      @keyframes cta-glow {
+        from {
+          box-shadow: 0 0 0 0 rgba(255, 107, 29, 0.08),
+            0 2px 8px 0 rgba(255, 107, 29, 0.09);
+        }
+        to {
+          box-shadow: 0 0 8px 1px rgba(255, 171, 85, 0.22),
+            0 2px 12px 0 rgba(255, 107, 29, 0.12);
+        }
+      }
     </style>
   </head>
   <body>
@@ -187,6 +225,13 @@
 
     <div class="info-grid">
       <div class="card full-width zentriert">
+        <a href="https://pacemind.app/es" target="_blank" class="cta-btn">
+          <span
+            style="font-size: 1em; vertical-align: middle; margin-right: 0.3em"
+            >🚀</span
+          >
+          App Start
+        </a>
         <a href="kontakt.html">Contacto</a> |
         <a href="impressum.html">Aviso legal</a> |
         <a href="datenschutzerklaerung.html">Política de privacidad</a>
@@ -386,6 +431,13 @@
         </p>
       </div>
       <div class="card full-width zentriert">
+        <a href="https://pacemind.app/es" target="_blank" class="cta-btn">
+          <span
+            style="font-size: 1em; vertical-align: middle; margin-right: 0.3em"
+            >🚀</span
+          >
+          App Start
+        </a>
         <a href="kontakt.html">Contacto</a> |
         <a href="impressum.html">Aviso legal</a> |
         <a href="datenschutzerklaerung.html">Política de privacidad</a>
