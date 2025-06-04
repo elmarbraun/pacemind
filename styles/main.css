@@ -216,11 +216,12 @@ body.content-page {
 }
 
 body.bg-atmo3 {
-  background: url('images/atmo3.png') no-repeat center center fixed;
+  background: url('../images/atmo3.png') no-repeat center center fixed;
+  background-size: cover;
 }
 
 body.bg-atmo4 {
-  background: url('images/atmo4.png') no-repeat center center fixed;
+  background: url('../images/atmo4.png') no-repeat center center fixed;
 }
 
 .content-wrapper {
