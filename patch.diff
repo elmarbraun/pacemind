@@ -1,0 +1,798 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/danke.html b/danke.html
+index 5d9b88a1fef7c9fbc0620136d3b9c0fcda7811df..c1b287748f1f7b52d249c8bba8eb27f8a2386c63 100644
+--- a/danke.html
++++ b/danke.html
+@@ -1,32 +1,36 @@
+ <!DOCTYPE html>
+ <html lang="de">
+ <head>
+   <meta charset="UTF-8">
+   <title>Danke, Deine Mail ist auf dem Weg</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
++  <link rel="manifest" href="manifest.json" />
++  <link rel="icon" href="images/icon-192.png" />
++  <meta name="theme-color" content="#ff6b1d" />
++  <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+   <style>
+     body {
+       margin: 0;
+       padding: 0;
+       font-family: 'Roboto', sans-serif;
+       color: white;
+       background: url('images/atmo3.png') no-repeat center center fixed;
+       background-size: cover;
+       display: flex;
+       justify-content: center;
+       align-items: flex-start;
+       min-height: 100vh;
+     }
+ 
+     a, a:visited, a:hover, a:active {
+       color: #ff6b1d;
+       text-decoration: none;
+     }
+ 
+     .content-wrapper {
+       background-color: rgba(20, 27, 12, 0.5);
+       padding: 2rem 1.5rem;
+       border-radius: 1rem;
+       margin: 4rem auto;
+       width: 90%;
+diff --git a/datenschutzerklaerung.html b/datenschutzerklaerung.html
+index 58a60ab475bca006f6361239f15d51f062d044bb..721386a6f159fac5c2f03a1beb872f1325297f3f 100644
+--- a/datenschutzerklaerung.html
++++ b/datenschutzerklaerung.html
+@@ -1,35 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="de">
+   <head>
+     <meta charset="UTF-8" />
+     <title>Datenschutzerklärung</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link
+       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+       rel="stylesheet"
+     />
++      <link rel="manifest" href="manifest.json" />
++      <link rel="icon" href="images/icon-192.png" />
++      <meta name="theme-color" content="#ff6b1d" />
++      <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+     <style>
+       body {
+         margin: 0;
+         padding: 0;
+         font-family: "Roboto", sans-serif;
+         color: white;
+         background: url("images/atmo3.png") no-repeat center center fixed;
+         background-size: cover;
+         display: flex;
+         justify-content: center;
+         align-items: flex-start;
+         min-height: 100vh;
+       }
+ 
+       a,
+       a:visited,
+       a:hover,
+       a:active {
+         color: #ff6b1d;
+         text-decoration: none;
+       }
+ 
+       .content-wrapper {
+         background-color: rgba(20, 27, 12, 0.5);
+         padding: 2rem 3rem;
+diff --git a/images/icon-192.png b/images/icon-192.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2fe91218b84f7d2494989946f739457c2ca3d4e5
+GIT binary patch
+literal 6234
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/images/icon-512.png b/images/icon-512.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..fe1dfb96b0c5b19d27b7691713faff1a5c976ce6
+GIT binary patch
+literal 11314
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/impressum.html b/impressum.html
+index fbc8376f55dbffb523d5ed29be46cdb9f0937017..02b073478116a20dd7b60d4e29deac5abf227379 100644
+--- a/impressum.html
++++ b/impressum.html
+@@ -1,32 +1,36 @@
+ <!DOCTYPE html>
+ <html lang="de">
+ <head>
+   <meta charset="UTF-8">
+   <title>Impressum</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
++  <link rel="manifest" href="manifest.json" />
++  <link rel="icon" href="images/icon-192.png" />
++  <meta name="theme-color" content="#ff6b1d" />
++  <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+   <style>
+     body {
+       margin: 0;
+       padding: 0;
+       font-family: 'Roboto', sans-serif;
+       color: white;
+       background: url('images/atmo3.png') no-repeat center center fixed;
+       background-size: cover;
+       display: flex;
+       justify-content: center;
+       align-items: flex-start;
+       min-height: 100vh;
+     }
+ 
+     a, a:visited, a:hover, a:active {
+       color: #ff6b1d;
+       text-decoration: none;
+     }
+ 
+     .content-wrapper {
+       background-color: rgba(20, 27, 12, 0.5);
+       padding: 2rem 3rem;
+       border-radius: 1rem;
+       margin: 4rem auto;
+       max-width: 960px;
+diff --git a/index.html b/index.html
+index f7a5e18bcb93792b7fe778304aecef06a4cd62ad..81e39d6b622edcd0d1b5c36d055bc3d36410116a 100644
+--- a/index.html
++++ b/index.html
+@@ -1,35 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="de">
+   <head>
+     <meta charset="UTF-8" />
+     <title>PaceMind entdecken</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link
+       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+       rel="stylesheet"
+     />
++    <link rel="manifest" href="manifest.json" />
++    <link rel="icon" href="images/icon-192.png" />
++    <meta name="theme-color" content="#ff6b1d" />
++    <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+ 
+     <style>
+       :root {
+         --hero-height: 250px;
+       }
+ 
+       #bg-video {
+         position: fixed;
+         top: 0;
+         left: 0;
+         min-width: 100vw;
+         min-height: 100vh;
+         object-fit: cover;
+         z-index: -1;
+       }
+       body {
+         margin: 0;
+         font-family: "Roboto", sans-serif;
+         background: #141b0c;
+         color: white;
+       }
+ 
+       #hero {
+         position: fixed;
+         top: 0;
+diff --git a/index_en.html b/index_en.html
+index 5389b5f0ccf72623e366404334c36e1de47fbd40..e9793f0e93b702524e368def8039e784c919972f 100644
+--- a/index_en.html
++++ b/index_en.html
+@@ -1,35 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="en">
+   <head>
+     <meta charset="UTF-8" />
+     <title>Discover PaceMind</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link
+       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+       rel="stylesheet"
+     />
++    <link rel="manifest" href="manifest.json" />
++    <link rel="icon" href="images/icon-192.png" />
++    <meta name="theme-color" content="#ff6b1d" />
++    <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+     <style>
+       :root {
+         --hero-height: 250px;
+       }
+       #bg-video {
+         position: fixed;
+         top: 0;
+         left: 0;
+         min-width: 100vw;
+         min-height: 100vh;
+         object-fit: cover;
+         z-index: -1;
+       }
+       body {
+         margin: 0;
+         font-family: "Roboto", sans-serif;
+         background: #141b0c;
+         color: white;
+       }
+       #hero {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: var(--hero-height);
+diff --git a/index_es.html b/index_es.html
+index 4f7440478d29a7a028747f60cb66b2986f55883c..73900e381f362517bf24f62311930da8a03ffd64 100644
+--- a/index_es.html
++++ b/index_es.html
+@@ -1,35 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="es">
+   <head>
+     <meta charset="UTF-8" />
+     <title>Descubre PaceMind</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link
+       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+       rel="stylesheet"
+     />
++    <link rel="manifest" href="manifest.json" />
++    <link rel="icon" href="images/icon-192.png" />
++    <meta name="theme-color" content="#ff6b1d" />
++    <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+     <style>
+       :root {
+         --hero-height: 250px;
+       }
+       #bg-video {
+         position: fixed;
+         top: 0;
+         left: 0;
+         min-width: 100vw;
+         min-height: 100vh;
+         object-fit: cover;
+         z-index: -1;
+       }
+       body {
+         margin: 0;
+         font-family: "Roboto", sans-serif;
+         background: #141b0c;
+         color: white;
+       }
+       #hero {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: var(--hero-height);
+diff --git a/index_fr.html b/index_fr.html
+index bfffde42a45d6b4df058e5baf508b3894681c2cd..5c1c93c174f021590c59df840b9005909129900f 100644
+--- a/index_fr.html
++++ b/index_fr.html
+@@ -1,35 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="fr">
+   <head>
+     <meta charset="UTF-8" />
+     <title>Découvrir PaceMind</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link
+       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+       rel="stylesheet"
+     />
++    <link rel="manifest" href="manifest.json" />
++    <link rel="icon" href="images/icon-192.png" />
++    <meta name="theme-color" content="#ff6b1d" />
++    <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+     <style>
+       :root {
+         --hero-height: 250px;
+       }
+       #bg-video {
+         position: fixed;
+         top: 0;
+         left: 0;
+         min-width: 100vw;
+         min-height: 100vh;
+         object-fit: cover;
+         z-index: -1;
+       }
+       body {
+         margin: 0;
+         font-family: "Roboto", sans-serif;
+         background: #141b0c;
+         color: white;
+       }
+       #hero {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: var(--hero-height);
+diff --git a/kontakt.html b/kontakt.html
+index 5c816dd41399f29c694623b9d1e3600540e85449..98a3767bdcd2fc2ae6cddc1a88e30375aa574fc1 100644
+--- a/kontakt.html
++++ b/kontakt.html
+@@ -1,35 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="de">
+   <head>
+     <meta charset="UTF-8" />
+     <title>Kontakt</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link
+       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+       rel="stylesheet"
+     />
++      <link rel="manifest" href="manifest.json" />
++      <link rel="icon" href="images/icon-192.png" />
++      <meta name="theme-color" content="#ff6b1d" />
++      <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+     <style>
+       body {
+         margin: 0;
+         padding: 0;
+         font-family: "Roboto", sans-serif;
+         color: white;
+         background: url("images/atmo4.png") no-repeat center center fixed;
+         background-size: cover;
+         display: flex;
+         justify-content: center;
+         align-items: flex-start;
+         min-height: 100vh;
+       }
+ 
+       a,
+       a:visited,
+       a:hover,
+       a:active {
+         color: #ff6b1d;
+         text-decoration: none;
+       }
+ 
+       .content-wrapper {
+         background-color: rgba(20, 27, 12, 0.5);
+         padding: 2rem 1.5rem;
+diff --git a/manifest.json b/manifest.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..ee4caf16d04965cb5b5d9e66612dd6c4c0b21aa8
+--- /dev/null
++++ b/manifest.json
+@@ -0,0 +1,20 @@
++{
++  "name": "PaceMind",
++  "short_name": "PaceMind",
++  "start_url": "./index.html",
++  "display": "standalone",
++  "background_color": "#141b0c",
++  "theme_color": "#ff6b1d",
++  "icons": [
++    {
++      "src": "images/icon-192.png",
++      "sizes": "192x192",
++      "type": "image/png"
++    },
++    {
++      "src": "images/icon-512.png",
++      "sizes": "512x512",
++      "type": "image/png"
++    }
++  ]
++}
+diff --git a/nutzungsbedingungen.html b/nutzungsbedingungen.html
+index f0780b533c633f8a13f2ea6804b493448d1de5af..c05803a89efb2052ecfc6e18414c6760152f2153 100644
+--- a/nutzungsbedingungen.html
++++ b/nutzungsbedingungen.html
+@@ -1,35 +1,39 @@
+ <!DOCTYPE html>
+ <html lang="de">
+   <head>
+     <meta charset="UTF-8" />
+     <title>Datenschutzerklärung</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link
+       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+       rel="stylesheet"
+     />
++      <link rel="manifest" href="manifest.json" />
++      <link rel="icon" href="images/icon-192.png" />
++      <meta name="theme-color" content="#ff6b1d" />
++      <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
+     <style>
+       body {
+         margin: 0;
+         padding: 0;
+         font-family: "Roboto", sans-serif;
+         color: white;
+         background: url("images/atmo3.png") no-repeat center center fixed;
+         background-size: cover;
+         display: flex;
+         justify-content: center;
+         align-items: flex-start;
+         min-height: 100vh;
+       }
+ 
+       a,
+       a:visited,
+       a:hover,
+       a:active {
+         color: #ff6b1d;
+         text-decoration: none;
+       }
+ 
+       .content-wrapper {
+         background-color: rgba(20, 27, 12, 0.5);
+         padding: 2rem 3rem;
+diff --git a/service-worker.js b/service-worker.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..d682ce9e12a4a23a612efd278df0da0188834310
+--- /dev/null
++++ b/service-worker.js
+@@ -0,0 +1,36 @@
++const cacheName = 'pacemind-v1';
++const filesToCache = [
++  '/',
++  '/index.html',
++  '/index_en.html',
++  '/index_es.html',
++  '/index_fr.html',
++  '/danke.html',
++  '/datenschutzerklaerung.html',
++  '/impressum.html',
++  '/kontakt.html',
++  '/nutzungsbedingungen.html',
++  '/images/icon-192.png',
++  '/images/icon-512.png',
++  '/images/atmo1.png',
++  '/images/atmo2.png',
++  '/images/atmo3.png',
++  '/images/atmo4.png',
++  '/images/platzhalter.png',
++  '/images/strava_ai_coach_logo.png',
++  '/images/strava.svg',
++  '/images/strava_icon_orange_sq.png',
++  '/videos',
++];
++
++self.addEventListener('install', event => {
++  event.waitUntil(
++    caches.open(cacheName).then(cache => cache.addAll(filesToCache))
++  );
++});
++
++self.addEventListener('fetch', event => {
++  event.respondWith(
++    caches.match(event.request).then(response => response || fetch(event.request))
++  );
++});
+ 
+EOF
+)
