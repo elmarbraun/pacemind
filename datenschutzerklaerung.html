@@ -11,72 +11,10 @@
       <link rel="manifest" href="manifest.json" />
       <link rel="icon" href="images/icon-192.png" />
       <meta name="theme-color" content="#ff6b1d" />
+      <link rel="stylesheet" href="styles/main.css" />
       <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Roboto", sans-serif;
-        color: white;
-        background: url("images/atmo3.png") no-repeat center center fixed;
-        background-size: cover;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: 100vh;
-      }
-
-      a,
-      a:visited,
-      a:hover,
-      a:active {
-        color: #ff6b1d;
-        text-decoration: none;
-      }
-
-      .content-wrapper {
-        background-color: rgba(20, 27, 12, 0.5);
-        padding: 2rem 3rem;
-        border-radius: 1rem;
-        margin: 4rem auto;
-        max-width: 960px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-      }
-
-      h2,
-      h3,
-      h4,
-      h5 {
-        color: #ff6b1d;
-        margin-top: 2rem;
-      }
-
-      p {
-        line-height: 1.6;
-        margin-bottom: 1rem;
-      }
-
-      ul {
-        padding-left: 1.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      li {
-        margin-bottom: 0.5rem;
-      }
-
-      button {
-        background: #ff6b1d;
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 1rem;
-        cursor: pointer;
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
+      </head>
+  <body class="content-page bg-atmo3">
     <div class="content-wrapper">
       <h2 class="wp-block-heading">
         Datenschutzerklärung / Privacy Policy / Politique de confidentialité /
