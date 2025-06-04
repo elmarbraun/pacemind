@@ -8,93 +8,10 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="images/icon-192.png" />
   <meta name="theme-color" content="#ff6b1d" />
+  <link rel="stylesheet" href="styles/main.css" />
   <script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("service-worker.js"); }</script>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Roboto', sans-serif;
-      color: white;
-      background: url('images/atmo3.png') no-repeat center center fixed;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-    }
-
-    a, a:visited, a:hover, a:active {
-      color: #ff6b1d;
-      text-decoration: none;
-    }
-
-    .content-wrapper {
-      background-color: rgba(20, 27, 12, 0.5);
-      padding: 2rem 1.5rem;
-      border-radius: 1rem;
-      margin: 4rem auto;
-      width: 90%;
-      max-width: 540px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    }
-
-    h2 {
-      color: #ff6b1d;
-      margin-top: 2rem;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-
-    input, select, textarea {
-      margin-bottom: 1.5rem;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      border: none;
-      font-size: 1rem;
-      width: 100%;
-    }
-
-    textarea {
-      resize: vertical;
-    }
-
-    button {
-      background: #ff6b1d;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.2rem;
-      border-radius: 1rem;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1rem;
-      align-self: flex-start;
-    }
-
-    /* --- Responsive Layout: ab 768px (Tablet) --- */
-    @media (min-width: 768px) {
-      .content-wrapper {
-        max-width: 720px;
-        padding: 2.5rem 3rem;
-      }
-    }
-
-    /* --- Responsive Layout: ab 1024px (Desktop) --- */
-    @media (min-width: 1024px) {
-      .content-wrapper {
-        max-width: 960px;
-      }
-    }
-  </style>
-</head>
-<body>
+  </head>
+<body class="content-page bg-atmo3">
   <div class="content-wrapper">
     <h2>Vielen Dank, Thank you, Merci beaucoup, Muchas gracias.</h2>
 <p>
