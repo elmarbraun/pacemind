@@ -4,11 +4,11 @@ $empfaenger = "elmar@pacemind.io"; // <-- Deine echte E-Mail hier eintragen
 $absenderAdresse = "website@pacemind.io"; // Optional, muss auf Mittwald existieren
 
 // Felder auslesen und filtern
-$betreff   = isset($_POST['betreff']) ? strip_tags($_POST['betreff']) : '';
-$vorname   = isset($_POST['vorname']) ? strip_tags($_POST['vorname']) : '';
-$nachname  = isset($_POST['nachname']) ? strip_tags($_POST['nachname']) : '';
-$email     = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) : '';
-$nachricht = isset($_POST['nachricht']) ? strip_tags($_POST['nachricht']) : '';
+$betreff   = isset($_POST['betreff']) ? strip_tags(trim($_POST['betreff'])) : '';
+$vorname   = isset($_POST['vorname']) ? strip_tags(trim($_POST['vorname'])) : '';
+$nachname  = isset($_POST['nachname']) ? strip_tags(trim($_POST['nachname'])) : '';
+$email     = isset($_POST['email']) ? filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL) : '';
+$nachricht = isset($_POST['nachricht']) ? strip_tags(trim($_POST['nachricht'])) : '';
 
 // Validierung
 if (!$email || !$betreff || !$vorname || !$nachname || !$nachricht) {
