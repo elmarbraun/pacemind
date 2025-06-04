@@ -19,8 +19,7 @@ const filesToCache = [
   '/images/platzhalter.png',
   '/images/strava_ai_coach_logo.png',
   '/images/strava.svg',
-  '/images/strava_icon_orange_sq.png',
-  '/videos',
+  '/images/strava_icon_orange_sq.png'
 ];
 
 self.addEventListener('install', event => {

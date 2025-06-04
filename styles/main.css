@@ -30,7 +30,7 @@ body.index-page {
   left: 0;
   width: 100%;
   height: var(--hero-height);
-  z-index: 5;
+  z-index: 0; /* allow content to scroll above the hero section */
   background-size: cover;
   background-position: center;
   animation: zoomMoveEnhanced 30s infinite alternate ease-in-out;
@@ -44,7 +44,9 @@ body.index-page {
   transform: translateX(-50%);
   height: 100%;
   max-height: var(--hero-height);
-  z-index: 10;
+
+  z-index: 0; /* place logo behind cards and text */
+
   pointer-events: none;
 }
 
@@ -233,6 +235,7 @@ body.bg-atmo4 {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+
 form {
   display: flex;
   flex-direction: column;
@@ -257,6 +260,7 @@ textarea {
 textarea {
   resize: vertical;
 }
+
 
 h2,
 h3,
